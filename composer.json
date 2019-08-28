@@ -1,0 +1,17 @@
+{
+    "name": "alexacrm/strong-serializer",
+    "description": "Converts generic objects to strongly-typed objects and vice-versa.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^8.4@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Selitskas",
+            "email": "p.selitskas@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
