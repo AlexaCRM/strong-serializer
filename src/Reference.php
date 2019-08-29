@@ -146,7 +146,7 @@ class Reference {
 
         $ref->castMap[$fieldName] = $ref;
 
-        return $this;
+        return $ref;
     }
 
     /**
