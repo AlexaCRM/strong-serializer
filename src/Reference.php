@@ -137,14 +137,14 @@ class Reference {
      * Casts the specified field value according to reference rules.
      *
      * @param string $fieldName
-     * @param Reference $ref
+     * @param Reference $targetRef
      *
      * @return $this
      */
-    public function addFieldCast( string $fieldName, Reference $ref ) {
+    public function addFieldCast( string $fieldName, Reference $targetRef ) {
         $ref = clone $this;
 
-        $ref->castMap[$fieldName] = $ref;
+        $ref->castMap[$fieldName] = $targetRef;
 
         return $ref;
     }
