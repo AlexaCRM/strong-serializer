@@ -12,6 +12,11 @@
             "email": "p.selitskas@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "AlexaCRM\\StrongSerializer\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
