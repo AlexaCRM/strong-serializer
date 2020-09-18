@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2019 AlexaCRM
+ * Copyright 2019-2020 AlexaCRM
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -27,17 +27,15 @@ class Deserializer {
 
     /**
      * FQCN => strongly-typed properties map.
-     *
-     * @var array
      */
-    protected $map;
+    protected array $map;
 
     /**
      * Deserializer constructor.
      *
-     * @param $map
+     * @param array $map
      */
-    public function __construct( $map ) {
+    public function __construct( array $map ) {
         $this->map = $map;
     }
 
@@ -117,7 +115,7 @@ class Deserializer {
      *
      * @return array
      */
-    protected function toStrongCollection( $data, Reference $type ) {
+    protected function toStrongCollection( array $data, Reference $type ): array {
         $collection = [];
 
         foreach ( $data as $value ) {
@@ -135,7 +133,7 @@ class Deserializer {
      *
      * @return array
      */
-    protected function toStrongMap( $data, Reference $type ) {
+    protected function toStrongMap( array $data, Reference $type ): array {
         $collection = $this->toStrongCollection( $data, $type );
 
         $map = [];
@@ -154,7 +152,7 @@ class Deserializer {
      *
      * @return Reference[]
      */
-    protected function getTypedPropertyRefs( string $className ) {
+    protected function getTypedPropertyRefs( string $className ): array {
         $classChain = class_parents( $className );
         if ( $classChain === false ) {
             $classChain = [];

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2019 AlexaCRM
+ * Copyright 2019-2020 AlexaCRM
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -29,45 +29,37 @@ class Reference {
 
     /**
      * Fully-qualified class name to convert the data into.
-     *
-     * @var string
      */
-    protected $className;
+    protected string $className;
 
     /**
      * Whether the referenced data should be constructed as a collection.
-     *
-     * @var bool
      */
-    protected $isCollection = false;
+    protected bool $isCollection = false;
 
     /**
      * Whether the referenced data should be constructed as a map.
-     *
-     * @var bool
      */
-    protected $isMap = false;
+    protected bool $isMap = false;
 
     /**
      * The class field name to use as the map key.
-     *
-     * @var string
      */
-    protected $mapKeyName;
+    protected ?string $mapKeyName;
 
     /**
      * The map of class field values to be cast.
      *
      * @var Reference[]
      */
-    protected $castMap = [];
+    protected array $castMap = [];
 
     /**
      * Class resolver closure.
      *
      * @var Closure
      */
-    protected $classResolver;
+    protected Closure $classResolver;
 
     /**
      * Reference constructor.
@@ -84,10 +76,8 @@ class Reference {
 
     /**
      * Creates a new type collection reference.
-     *
-     * @return static
      */
-    public function toCollection() {
+    public function toCollection(): Reference {
         $ref = clone $this;
 
         $ref->isCollection = true;
@@ -103,9 +93,9 @@ class Reference {
      *
      * @param string $keyName
      *
-     * @return static
+     * @return Reference
      */
-    public function toMap( string $keyName ) {
+    public function toMap( string $keyName ): Reference {
         $ref = clone $this;
 
         $ref->isCollection = false;
@@ -120,10 +110,8 @@ class Reference {
      * Creates a strongly-typed object as specified during instantiation.
      *
      * This is the default state.
-     *
-     * @return static
      */
-    public function toObject() {
+    public function toObject(): Reference {
         $ref = clone $this;
 
         $ref->isCollection = false;
@@ -139,11 +127,10 @@ class Reference {
      * @param string $fieldName
      * @param Reference $targetRef
      *
-     * @return $this
+     * @return Reference
      */
-    public function addFieldCast( string $fieldName, Reference $targetRef ) {
+    public function addFieldCast( string $fieldName, Reference $targetRef ): Reference {
         $ref = clone $this;
-
         $ref->castMap[$fieldName] = $targetRef;
 
         return $ref;
@@ -156,7 +143,7 @@ class Reference {
      *
      * @return string
      */
-    public function getClassName( $data ) {
+    public function getClassName( $data ): string {
         if ( $this->classResolver instanceof Closure ) {
             return $this->classResolver->call( $this, $data );
         }
@@ -169,34 +156,28 @@ class Reference {
      *
      * @return Reference[]
      */
-    public function getCastMap() {
+    public function getCastMap(): array {
         return $this->castMap;
     }
 
     /**
      * Tells whether the referenced type should be enclosed into a collection.
-     *
-     * @return bool
      */
-    public function isCollection() {
+    public function isCollection(): bool {
         return $this->isCollection && !$this->isMap;
     }
 
     /**
      * Tells whether the referenced type should be enclosed into a map.
-     *
-     * @return bool
      */
-    public function isMap() {
+    public function isMap(): bool {
         return $this->isMap && !$this->isCollection;
     }
 
     /**
      * Returns the class field to be used as the map key.
-     *
-     * @return string|null
      */
-    public function getMapKey() {
+    public function getMapKey(): ?string {
         return $this->mapKeyName;
     }
 
