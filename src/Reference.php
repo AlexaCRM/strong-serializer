@@ -45,7 +45,7 @@ class Reference {
     /**
      * The class field name to use as the map key.
      */
-    protected ?string $mapKeyName;
+    protected ?string $mapKeyName = null;
 
     /**
      * The map of class field values to be cast.
@@ -57,9 +57,9 @@ class Reference {
     /**
      * Class resolver closure.
      *
-     * @var Closure
+     * @var Closure|null
      */
-    protected Closure $classResolver;
+    protected ?Closure $classResolver = null;
 
     /**
      * Reference constructor.
